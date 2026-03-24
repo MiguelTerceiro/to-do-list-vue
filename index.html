@@ -1,0 +1,107 @@
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+
+        <p class="header-label">lista de tarefas</p>
+        <h1>Minhas<br><span>Tarefas.</span></h1>
+
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-num pending">{{ pendingCount }}</span>
+                <span class="stat-label">A fazer</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num done">{{ doneCount }}</span>
+                <span class="stat-label">Concluídas</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num total">{{ tasks.length }}</span>
+                <span class="stat-label">Total</span>
+            </div>
+        </div>
+
+        <div class="progress-wrap" v-if="tasks.length > 0">
+            <div class="progress-bar" :style="{ width: progressPct + '%' }"></div>
+        </div>
+
+        <div class="add-form">
+            <input
+                v-model="newTaskText"
+                placeholder="Nova tarefa"
+                @keyup.enter="addTask"
+            />
+            <button @click="addTask">+</button>
+        </div>
+
+        <div class="tabs">
+            <button :class="{ active: filter === 'all' }" @click="filter = 'all'">
+                <span class="tab-dot all"></span> Todas
+            </button>
+            <button :class="{ active: filter === 'pending' }" @click="filter = 'pending'">
+                <span class="tab-dot pending"></span> A Fazer
+            </button>
+            <button :class="{ active: filter === 'done' }" @click="filter = 'done'">
+                <span class="tab-dot done"></span> Concluídas
+            </button>
+        </div>
+        <ul>
+            <div v-if="filteredTasks.length === 0" class="empty">
+                <span v-if="filter === 'done'">Nenhuma tarefa concluída ainda.</span>
+                <span v-else-if="filter === 'pending'">Nenhuma tarefa pendente!</span>
+                <span v-else>Adiciona a tua primeira tarefa.</span>
+            </div>
+
+            <li
+                v-for="task in filteredTasks"
+                :key="task.id"
+                :class="{ done: task.isDone }"
+            >
+                <div class="checkbox" @click="toggleDone(task)">
+                    <span v-if="task.isDone">✓</span>
+                </div>
+
+                <div class="task-body">
+                    <input
+                        v-if="editingId === task.id"
+                        :id="'edit-' + task.id"
+                        v-model="editText"
+                        class="edit-input"
+                        @keyup.enter="saveEdit(task)"
+                        @keyup.escape="cancelEdit"
+                    />
+                    <div v-else class="task-text">{{ task.text }}</div>
+                    <div class="task-date">{{ task.date }}</div>
+                </div>
+
+                <div class="task-actions">
+                    <template v-if="editingId === task.id">
+                        <button class="icon-btn confirm" @click="saveEdit(task)" title="Guardar">✓</button>
+                        <button class="icon-btn danger"  @click="cancelEdit"     title="Cancelar">✕</button>
+                    </template>
+                    <template v-else>
+                        <button class="icon-btn"        @click="startEdit(task)"    title="Editar">✎</button>
+                        <button class="icon-btn danger" @click="removeTask(task.id)" title="Apagar">X</button>
+                    </template>
+                </div>
+            </li>
+        </ul>
+
+        <button class="clear-btn" v-if="doneCount > 0" @click="clearDone">
+            Limpar concluídas ({{ doneCount }})
+        </button>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

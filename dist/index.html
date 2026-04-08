@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
@@ -6,107 +7,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="/assets/index-C10iwFng.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-vKR9xcWv.css">
+  <script type="module" crossorigin src="/assets/main-BUsLdPmD.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/vue-i18n-core-Dnes3IDy.js">
+  <link rel="stylesheet" crossorigin href="/assets/vue-i18n-core-vKR9xcWv.css">
 </head>
 <body>
-    
-  <div id="app">
-    <button class="btn-logs" onclick="window.location.href='login.html'">{{ $t('login') }}</button>
-    <button class="btn-logs" onclick="window.location.href='registo.html'"> {{ $t('register') }}</button>
-    <br><br
-    <p class="header-label">{{ $t('headerLabel') }}</p>
-    <h1>{{ $t('My') }}<br /><span>{{ $t('Tasks') }}.</span></h1>
-
-    <div class="stats">
-      <div class="stat">
-        <span class="stat-num pending">{{ pendingCount }}</span>
-        <span class="stat-label">{{ $t('tasksPending') }}</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num done">{{ doneCount }}</span>
-        <span class="stat-label">{{ $t('tasksDone') }}</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num total">{{ tasks.length }}</span>
-        <span class="stat-label">{{ $t('tasksTotal') }}</span>
-      </div>
-    </div>
-
-    <div class="progress-wrap" v-if="tasks.length > 0">
-      <div class="progress-bar" :style="{ width: progressPct + '%' }"></div>
-    </div>
-
-    <div class="add-form">
-      <input
-        v-model="newTaskText"
-        :placeholder="$t('placeholderNewTask')"
-        @keyup.enter="addTask"
-      />
-      <button @click="addTask">+</button>
-    </div>
-
-    <div class="tabs">
-      <button :class="{ active: filter === 'all' }" @click="filter = 'all'">
-        <span class="tab-dot all"></span> {{ $t('tabs.all') }}
-      </button>
-      <button :class="{ active: filter === 'pending' }" @click="filter = 'pending'">
-        <span class="tab-dot pending"></span> {{ $t('tabs.pending') }}
-      </button>
-      <button :class="{ active: filter === 'done' }" @click="filter = 'done'">
-        <span class="tab-dot done"></span> {{ $t('tabs.done') }}
-      </button>
-    </div>
-
-    <ul>
-      <div v-if="filteredTasks.length === 0" class="empty">
-        <span v-if="filter === 'done'">{{ $t('empty.done') }}</span>
-        <span v-else-if="filter === 'pending'">{{ $t('empty.pending') }}</span>
-        <span v-else>{{ $t('empty.none') }}</span>
-      </div>
-
-      <li
-        v-for="task in filteredTasks"
-        :key="task.id"
-        :class="{ done: task.isDone }"
-      >
-        <div class="checkbox" @click="toggleDone(task)">
-          <span v-if="task.isDone">✓</span>
-        </div>
-
-        <div class="task-body">
-          <input
-            v-if="editingId === task.id"
-            :id="'edit-' + task.id"
-            v-model="editText"
-            class="edit-input"
-            @keyup.enter="saveEdit(task)"
-            @keyup.escape="cancelEdit"
-          />
-          <div v-else class="task-text">{{ task.text }}</div>
-          <div class="task-date">{{ task.date }}</div>
-        </div>
-
-        <div class="task-actions">
-          <template v-if="editingId === task.id">
-            <button class="icon-btn confirm" @click="saveEdit(task)" title="Guardar">✓</button>
-            <button class="icon-btn danger" @click="cancelEdit" title="Cancelar">✕</button>
-          </template>
-          <template v-else>
-            <button class="icon-btn" @click="startEdit(task)" title="Editar">✎</button>
-            <button class="icon-btn danger" @click="removeTask(task.id)" title="Apagar">X</button>
-          </template>
-        </div>
-      </li>
-    </ul>
-
-    <button class="clear-btn" v-if="doneCount > 0" @click="clearDone">
-      {{ $t('clearDone') }} ({{ doneCount }})
-    </button>
-    <br>
-    <button class="button" @click="changeLanguage('pt')">PT</button>
-    <button class="button"  @click="changeLanguage('en')">EN</button>
-  </div>
-
+  <div id="app"></div>
 </body>
 </html>

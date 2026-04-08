@@ -38,4 +38,4 @@ app.delete('/api/tasks/:id', async (req, res) => {
     res.json({ ok: true });
 });
 
-app.listen(3000, () => console.log('Servidor a correr em http://localhost:3000'));
+app.listen(3000, () => console.log('Servidor a correr em http://localhost:3000'));0e3

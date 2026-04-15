@@ -2,7 +2,6 @@
   <button class="btn-logs" @click="navigate('login.html')">{{ $t('login') }}</button>
   <button class="btn-logs" @click="navigate('registo.html')">{{ $t('register') }}</button>
 
-  <p class="header-label">{{ $t('headerLabel') }}</p>
   <h1>{{ $t('My') }}<br /><span>{{ $t('Tasks') }}.</span></h1>
 
   <div class="stats">

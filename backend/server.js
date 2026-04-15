@@ -5,13 +5,13 @@ import bcrypt from 'bcrypt';
 const app = express();
 
 app.use(express.json());
-app.use(express.static('../dist'));
+app.use(express.static('../dist')); // Serve os ficheiros estáticos do Vue.js
 
 // POST - registar utilizador
 app.post('/register', async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password } = req.body; 
     if (!username || !email || !password)
-        return res.status(400).json({ erro: 'Campos em falta' });
+        return res.status(400).json({ erro: 'Campos em falta' }); 
 
     const password_hash = await bcrypt.hash(password, 10);
     try {
@@ -19,9 +19,9 @@ app.post('/register', async (req, res) => {
             'INSERT INTO utilizadores (nome, email, password_hash) VALUES (?, ?, ?)',
             [username, email, password_hash]
         );
-        res.json({ ok: true });
+        res.json({ ok: true }); 
     } catch (err) {
-        if (err.code === 'ER_DUP_ENTRY')
+        if (err.code === 'ER_DUP_ENTRY') 
             return res.status(400).json({ erro: 'Email já existe' });
         res.status(500).json({ erro: 'Erro ao registar' });
     }

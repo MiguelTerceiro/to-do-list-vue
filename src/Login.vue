@@ -17,7 +17,7 @@
         <button type="submit" class="auth-btn">{{ $t('login') }}</button>
       </form>
 
-      <div class="auth-divider"><span>ou</span></div>
+      <div class="auth-divider"><span>{{ $t('or') }}</span></div>
       <div class="auth-footer">
         {{ $t('donthaveaccount') }} <a href="registo.html">{{ $t('register') }}</a>
       </div>

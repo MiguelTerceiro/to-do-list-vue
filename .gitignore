@@ -5,5 +5,7 @@ frontend/dist
 backend/node_modules
 .env
 .env.*
+!.env.example
+!**/.env.example
 *.local
 npm-debug.log*

@@ -71,14 +71,14 @@ No backend:
 
 ```powershell
 cd backend
-npm.cmd install
+npm install
 ```
 
 No frontend:
 
 ```powershell
 cd frontend
-npm.cmd install
+npm install
 ```
 
 ### 5. Preparar a base de dados
@@ -87,7 +87,7 @@ Podes correr manualmente este comando uma vez:
 
 ```powershell
 cd backend
-npm.cmd run db:setup
+npm run db:setup
 ```
 
 Este comando:
@@ -101,7 +101,7 @@ Mesmo que nao corras este comando, o backend tenta fazer isto automaticamente ao
 
 ```powershell
 cd backend
-npm.cmd run dev
+npm run dev
 ```
 
 ### 7. Arrancar o frontend
@@ -110,7 +110,7 @@ Noutro terminal:
 
 ```powershell
 cd frontend
-npm.cmd run dev
+npm run dev
 ```
 
 ### 8. Abrir no browser
@@ -124,17 +124,17 @@ Abrir:
 Backend:
 
 ```powershell
-npm.cmd run db:setup
-npm.cmd run prisma:generate
-npm.cmd run prisma:migrate:deploy
-npm.cmd run prisma:studio
+npm run db:setup
+npm run prisma:generate
+npm run prisma:migrate:deploy
+npm run prisma:studio
 ```
 
 Frontend:
 
 ```powershell
-npm.cmd run dev
-npm.cmd run build
+npm run dev
+npm run build
 ```
 
 ## Se alguma coisa falhar
@@ -143,4 +143,4 @@ npm.cmd run build
 - Confirmar que o utilizador do MySQL tem permissao para criar bases de dados.
 - Confirmar que a porta `3000` nao esta ocupada por outra app.
 - Confirmar que a porta `5173` nao esta ocupada.
-- Se o PowerShell bloquear `npm`, usar `npm.cmd`.
+- Se o PowerShell bloquear `npm`, usar `npm.cmd` como alternativa.

@@ -17,12 +17,13 @@ DATABASE_URL="mysql://root:password@localhost:3306/todo_app"
 
 ## Criar as tabelas da base de dados
 
-Garante primeiro que a base de dados existe no MySQL. Depois corre:
+Com Node, podes criar a base de dados e aplicar as migrations com:
 
 ```bash
-npm run prisma:migrate:deploy
-npm run prisma:generate
+npm run db:setup
 ```
+
+O comando `db:setup` cria a base de dados se ela ainda nao existir, aplica as migrations do Prisma e gera o Prisma Client.
 
 As migrations em `prisma/migrations` recriam a estrutura das tabelas:
 

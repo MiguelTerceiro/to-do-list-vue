@@ -4,6 +4,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "db:create": "node scripts/create-database.js",
+    "db:setup": "npm run db:create && npm run prisma:migrate:deploy && npm run prisma:generate",
     "prisma:generate": "prisma generate",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",

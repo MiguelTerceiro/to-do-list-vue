@@ -25,6 +25,13 @@ npm run db:setup
 
 O comando `db:setup` cria a base de dados se ela ainda nao existir, aplica as migrations do Prisma e gera o Prisma Client.
 
+Se uma tentativa anterior falhou com `P3009`, a base pode ter ficado com migrations falhadas. Como isto apaga os dados dessa base, usa apenas numa base de desenvolvimento:
+
+```bash
+npx prisma migrate reset --force
+npm run db:setup
+```
+
 As migrations em `prisma/migrations` recriam a estrutura das tabelas:
 
 - `utilizadores`

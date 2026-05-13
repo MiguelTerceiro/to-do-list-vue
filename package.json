@@ -3,17 +3,26 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:migrate:status": "prisma migrate status",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
+    "@prisma/client": "^7.8.0",
     "bcrypt": "^6.0.0",
+    "dotenv": "^16.6.1",
     "express": "^5.2.1",
     "mysql2": "^3.20.0",
+    "nodemailer": "^8.0.7",
     "vue": "^3.5.32",
     "vue-i18n": "^12.0.0-alpha.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.5",
+    "prisma": "^7.8.0",
     "vite": "^8.0.7"
   },
   "name": "to-do-list-vue-main",

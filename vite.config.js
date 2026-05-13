@@ -3,6 +3,14 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [vue()],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:3000',
+      '/login': 'http://localhost:3000',
+      '/register': 'http://localhost:3000',
+      '/auth': 'http://localhost:3000'
+    }
+  },
   build: {
     rollupOptions: {
       input: {

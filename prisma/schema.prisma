@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model User {
+  id               Int     @id @default(autoincrement())
+  nome             String
+  email            String  @unique
+  passwordHash     String? @map("password_hash")
+  googleId         String? @unique @map("google_id")
+  authProvider     String  @default("local") @map("auth_provider")
+  avatarUrl        String? @map("avatar_url")
+  emailVerificado  Boolean @default(false) @map("email_verificado")
+
+  tarefas              Task[]
+  tarefasPartilhadas   TaskShare[] @relation("SharedWith")
+  partilhasCriadas     TaskShare[] @relation("SharedBy")
+
+  @@map("utilizadores")
+}
+
+model Task {
+  id           Int      @id @default(autoincrement())
+  utilizadorId Int      @map("utilizador_id")
+  texto        String
+  concluida    Boolean  @default(false)
+  dataCriacao  DateTime @default(now()) @map("data_criacao")
+  dataAtualiza DateTime @updatedAt @map("data_atualizacao")
+
+  utilizador User        @relation(fields: [utilizadorId], references: [id], onDelete: Cascade)
+  partilhas  TaskShare[]
+
+  @@index([utilizadorId])
+  @@map("tarefas")
+}
+
+model TaskShare {
+  id                 Int      @id @default(autoincrement())
+  tarefaId           Int      @map("tarefa_id")
+  sharedWithUserId   Int      @map("shared_with_user_id")
+  sharedByUserId     Int      @map("shared_by_user_id")
+  dataCriacao        DateTime @default(now()) @map("data_criacao")
+
+  tarefa         Task @relation(fields: [tarefaId], references: [id], onDelete: Cascade)
+  sharedWithUser User @relation("SharedWith", fields: [sharedWithUserId], references: [id], onDelete: Cascade)
+  sharedByUser   User @relation("SharedBy", fields: [sharedByUserId], references: [id], onDelete: Cascade)
+
+  @@unique([tarefaId, sharedWithUserId])
+  @@index([sharedWithUserId])
+  @@index([sharedByUserId])
+  @@map("tarefas_partilhas")
+}

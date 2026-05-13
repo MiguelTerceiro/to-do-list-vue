@@ -27,7 +27,7 @@ app.get('/', (_req, res) => {
       .status(200)
       .type('text/plain')
       .send(
-        'Frontend Vite pronto para desenvolvimento. Usa "npm run dev:frontend" e "npm run dev:backend" na raiz do projeto.'
+        'Frontend Vite pronto para desenvolvimento. Usa "npm.cmd run dev" dentro de "frontend" e "npm.cmd run dev" dentro de "backend".'
       )
   }
 

@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import { app } from './app.js'
+import { bootstrapDatabase } from './config/databaseBootstrap.js'
 import { prisma } from './config/prisma.js'
 
 const PORT = Number(process.env.PORT) || 3000
@@ -21,6 +22,7 @@ async function shutdown(signal) {
 
 async function startServer() {
   try {
+    await bootstrapDatabase()
     await prisma.$connect()
     console.log('Base de dados ligada com Prisma')
 
@@ -28,7 +30,7 @@ async function startServer() {
       console.log(`Servidor a correr em http://localhost:${PORT}`)
     })
   } catch (error) {
-    console.error('Erro ao ligar a base de dados:', error)
+    console.error('Erro ao preparar ou ligar a base de dados:', error)
     process.exit(1)
   }
 }

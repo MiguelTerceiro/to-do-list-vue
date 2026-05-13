@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "db:setup": "node src/scripts/setupDatabase.js",
     "dev": "node src/server.js",
     "start": "node src/server.js",
     "prisma:generate": "prisma generate",
